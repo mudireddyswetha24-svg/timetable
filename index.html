@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Timetable Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================
+         ANIMATED BACKGROUND
+    ====================================== -->
+
+    <div class="background">
+
+        <div class="blob blob1"></div>
+
+        <div class="blob blob2"></div>
+
+        <div class="blob blob3"></div>
+
+    </div>
+
+
+    <!-- =====================================
+         MAIN PAGE
+    ====================================== -->
+
+    <div class="page">
+
+
+        <!-- =================================
+             HEADER
+        ================================== -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="logo">
+                    📚
+                </div>
+
+                <div>
+
+                    <h1>
+                        My Timetable
+                    </h1>
+
+                    <p>
+                        Plan your day • Stay productive •
+                        Achieve your goals
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- LIVE CLOCK -->
+
+            <div class="clock-box">
+
+                <div class="clock-icon">
+                    🕐
+                </div>
+
+                <div>
+
+                    <div
+                        id="clock"
+                        class="clock"
+                    >
+                        00:00:00
+                    </div>
+
+                    <div class="clock-label">
+                        Current Time
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================
+             TODAY CARD
+        ================================== -->
+
+        <section class="welcome-card">
+
+            <div>
+
+                <span class="small-title">
+                    📅 TODAY'S SCHEDULE
+                </span>
+
+                <h2>
+                    Let's make today productive! ✨
+                </h2>
+
+                <p id="todayDate">
+                    Loading date...
+                </p>
+
+            </div>
+
+
+            <div class="welcome-emoji">
+                🚀
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             ADD TASK
+        ================================== -->
+
+        <section class="card add-task-card">
+
+            <div class="section-title">
+
+                <div class="section-icon purple">
+                    ➕
+                </div>
+
+                <div>
+
+                    <h2>
+                        Add New Task
+                    </h2>
+
+                    <p>
+                        What do you want to accomplish?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- TASK -->
+
+                <div class="input-group">
+
+                    <label>
+                        📝 Task
+                    </label>
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Example: Study Digital Electronics"
+                    >
+
+                </div>
+
+
+
+                <!-- TIME -->
+
+                <div class="input-group">
+
+                    <label>
+                        ⏰ Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="timeInput"
+                    >
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="input-group">
+
+                    <label>
+                        🏷️ Category
+                    </label>
+
+                    <select id="categoryInput">
+
+                        <option value="College">
+                            📚 College
+                        </option>
+
+                        <option value="Study">
+                            📝 Study
+                        </option>
+
+                        <option value="Fitness">
+                            🏃 Fitness
+                        </option>
+
+                        <option value="Personal">
+                            🏠 Personal
+                        </option>
+
+                        <option value="Other">
+                            📌 Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- REMINDER -->
+
+                <div class="input-group">
+
+                    <label>
+                        🔔 Reminder
+                    </label>
+
+                    <select id="reminderInput">
+
+                        <option value="0">
+                            At task time
+                        </option>
+
+                        <option value="5">
+                            5 minutes before
+                        </option>
+
+                        <option value="10">
+                            10 minutes before
+                        </option>
+
+                        <option
+                            value="30"
+                            selected
+                        >
+                            30 minutes before
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                class="add-button"
+                onclick="addTask()"
+            >
+
+                <span>
+                    ➕
+                </span>
+
+                Add Task
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================
+             STATISTICS
+        ================================== -->
+
+        <section class="stats">
+
+
+            <!-- TOTAL -->
+
+            <div class="stat-card blue-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <div
+                        id="totalTasks"
+                        class="stat-number"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Total Tasks
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- COMPLETED -->
+
+            <div class="stat-card green-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <div
+                        id="completedTasks"
+                        class="stat-number"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Completed
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PENDING -->
+
+            <div class="stat-card orange-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <div
+                        id="pendingTasks"
+                        class="stat-number"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             TIMETABLE
+        ================================== -->
+
+        <section class="card timetable-card">
+
+
+            <div class="timetable-header">
+
+                <div class="section-title">
+
+                    <div class="section-icon blue">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Today's Timetable
+                        </h2>
+
+                        <p>
+                            Your tasks for today
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="notification-button"
+                    onclick="enableNotifications()"
+                >
+
+                    🔔
+                    Enable Notifications
+
+                </button>
+
+            </div>
+
+
+
+            <!-- TASK LIST -->
+
+            <div id="taskList"></div>
+
+
+
+            <!-- EMPTY -->
+
+            <div
+                id="emptyMessage"
+                class="empty-message"
+            >
+
+                <div class="empty-animation">
+                    📅
+                </div>
+
+                <h3>
+                    No tasks yet
+                </h3>
+
+                <p>
+                    Add your first task above to
+                    create your timetable.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             FOOTER
+        ================================== -->
+
+        <footer>
+
+            <p>
+                💜 Your personal productivity assistant
+            </p>
+
+            <p>
+                Stay focused • Stay consistent •
+                Keep growing 🚀
+            </p>
+
+        </footer>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         FULL SCREEN ALARM
+    ====================================== -->
+
+    <div
+        id="alarmScreen"
+        class="alarm-screen"
+    >
+
+        <div class="alarm-particles">
+
+            <span>✨</span>
+            <span>⭐</span>
+            <span>💫</span>
+            <span>✨</span>
+            <span>⭐</span>
+
+        </div>
+
+
+        <div class="alarm-box">
+
+
+            <div class="alarm-bell">
+
+                🔔
+
+            </div>
+
+
+            <div class="alarm-title">
+
+                TIME FOR YOUR TASK!
+
+            </div>
+
+
+            <h2 id="alarmTaskName">
+                Your Task
+            </h2>
+
+
+            <p id="alarmTaskCategory">
+                Category
+            </p>
+
+
+            <div class="alarm-message">
+
+                💪 You've got this!
+                Let's get it done.
+
+            </div>
+
+
+            <button
+                onclick="closeAlarm()"
+                class="alarm-close-button"
+            >
+
+                ✓ Got it!
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
